@@ -4,12 +4,29 @@ window.onload = function() {
         // Par defaut le formulaire de connection est afficher, le formulaire d'inscription quand a lui est en 'display: none';
         // FAITE EN SORTE QUE AU CLICK SUR LES BUTTONS POSSEDANT LA CLASS 'square-button-empty'
             // DE MASQUER LE LOGIN FORM POUR AFFICHER LE REGISTER FORM, ET INVERSEMENT <->
+           
+           
+            const buttons = document.getElementsByClassName ("square-button-empty");
+            const contactForms = document.querySelectorAll(".contact-form");
+            
+            const connexionForms = document.querySelector("#connexion-form");
+            const inscriptionForms = document.querySelector("#register-form");
 
-
-
-
-
-
+            for (let i = 0; i < buttons.length; i++) {
+                console.log(buttons)
+                   
+                buttons[i].addEventListener("click", function(e) {
+                    e.preventDefault();
+                    if (e.target.getAttribute("data-form") =="0"){
+                        connexionForms.style.display = "none";
+                        inscriptionForms.style.display = "initial";
+                    }
+                    else if(e.target.getAttribute("data-form") =="1") {
+                        inscriptionForms.style.display = "none";
+                        connexionForms.style.display = "initial";
+                    }
+                })
+            }
 
 
     // --------------------- STEP 2 ----------------------
@@ -18,12 +35,9 @@ window.onload = function() {
             //  1. récuperer la valeur de tout les champs de formulaires
             //  2. vérifier que le 'username' fait au moins 5 caracteres alphanumérique
             //  3. vérifier que le password fait au moins 8 caracteres et contient a minima une majuscule/minuscule ainsi qu'un entier (integer)
-
-
-
-
-
-
+            
+            
+            
     // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
         // A L'INSCRIPTION :
