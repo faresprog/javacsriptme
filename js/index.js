@@ -13,7 +13,7 @@ window.onload = function() {
             const inscriptionForms = document.querySelector("#register-form");
 
             for (let i = 0; i < buttons.length; i++) {
-                console.log(buttons)
+                console.log(buttons);
                    
                 buttons[i].addEventListener("click", function(e) {
                     e.preventDefault();
@@ -36,7 +36,57 @@ window.onload = function() {
             //  2. vérifier que le 'username' fait au moins 5 caracteres alphanumérique
             //  3. vérifier que le password fait au moins 8 caracteres et contient a minima une majuscule/minuscule ainsi qu'un entier (integer)
             
-            
+           // correction
+           var loginButton = document.getElementById('login-submit');
+            var registerButton = document.getElementById('register-submit');
+
+            loginButton.onclick = function (event) {
+                let form = document.getElementById('connexion-form');
+                let email = form[0].value;
+                let password = form[1].value;
+                
+                var user = localStorage.getItem('user');
+                user = JSON.parse(user);
+
+                if (user.email == email && user.password == password)
+                    window.location = "home.html";
+            }
+
+            registerButton.onclick = function (event) {
+                let form = document.getElementById('register-form');
+                let username = form[0].value;
+                let email = form[1].value;
+                let password = form[2].value;
+                let password_confirm = form[3].value;
+                let error = false;
+
+                let usernameStatus = checkUsername(username);
+                if(usernameStatus != true) {
+                    showAlert('L\'username doit comporter au moins 5 caracteres')
+                    error = true;
+                }
+
+                let passwordStatus = checkPassword(password);
+                if(passwordStatus != true) {
+                    showAlert('Votre mot de passe doit comporter au moins (1 minuscule, 1 majuscule, 1 chiffre)')
+                    error = true;
+                }
+
+                if (password !== password_confirm) {
+                    showAlert('La confirmation du mot de passe à echouer')
+                    error = true;
+                }
+
+
+                if (error == false) {
+                    var user = new User (username, email, password,);
+                    localStorage.setItem('user', JSON.stringify(user)); 
+                }
+
+
+            }
+
+        
             
     // --------------------- STEP 3 -------------------------
         // une fois nos saisies utilisateurs stocker dans des variables faite en sorte de :
@@ -48,7 +98,7 @@ window.onload = function() {
 
                 // var user = new User('Toto (username)', 'toto@email.fr (email)', 'tamereenslip (password)');
                 // console.log('Bonjour ' + user.getUsername() + ' !');
-
+                
 
             // 2. Modifier ensuite le code ci dessus pour qu'a l'instantation d'un nouvelle 'User' ---
             // --> on utilise les données saisie du formulaire d'inscription pour setup les propriétés notre nouvelle 'User'
